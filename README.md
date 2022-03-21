@@ -32,3 +32,10 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+referencias
+https://pt-br.reactjs.org/docs/react-dom-server.html
+https://medium.com/@nikjohn/creating-a-dynamic-jsx-marker-with-react-leaflet-f75fff2ddb9
+https://stackoverflow.com/questions/47723812/custom-marker-icon-with-react-leaflet
+https://docs.eegeo.com/eegeo.js/v0.1.740/docs/leaflet/L.DivIcon/
