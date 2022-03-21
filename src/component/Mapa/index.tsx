@@ -1,44 +1,57 @@
-import { MapContainer, TileLayer,  Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import icon from 'leaflet/dist/images/marker-icon.png';
-import { Marker,CustomMarker } from "./CustomMarker"
-import {BiAngry} from 'react-icons/bi'
+import { CustomMarker } from "./CustomMarker"
 import ReactDOMServer from 'react-dom/server';
+import { FaSchool } from 'react-icons/fa'
+import styles from './styles.module.scss'
+//import './styles.scss'
+interface IMARKER {
+  tipoIcon: string
+  popup?: string
+  position: [number, number]
+}
 
-//import icon from '../../dist/logoEscola.png';
+interface Iprorps {
+  markers: IMARKER[]
+  center: [number, number]
+
+}
+
 import L from "leaflet";
-const Map = () => {
-  
-    const iconPerson =  new L.Icon({
-       // iconSize: [38, 95],
-        iconUrl:'./img/marker-icon.png',
-    });
+const Map = (props: Iprorps) => {
+  const { markers, center } = props;
+  const iconPerson = new L.Icon({
+    iconUrl: './img/marker-icon.png',
+  });
 
-    const mapNodeIcon = L.divIcon({
-        html: ReactDOMServer.renderToString(<BiAngry/>),
-         
-        iconAnchor: [10, 10],
-        popupAnchor: [0, -19],
-        iconSize: [55, 55],
-      });
-  
-  //@react-icons/all-files/fa/FaBeer
-    return (
-    <MapContainer
-      center={[40.8054, -74.0241]}
+  const Iconesola = L.divIcon({
+    html: ReactDOMServer.renderToString(<div className={styles['custom-icon']}><FaSchool /></div>),
+    className: "styles['custom-icon']",
+    iconAnchor: [10, 10],
+    popupAnchor: [0, -19],
+    iconSize: [35, 35],
+  });
+
+
+  return (
+   <div className={styles.customdiv}>
+      <MapContainer
+      center={center}
       zoom={14}
-      scrollWheelZoom={false}
+      scrollWheelZoom={true}
       style={{ height: "100%", width: "100%" }}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <CustomMarker icon={mapNodeIcon} draggable position={[40.8054, -74.0241]} 
-      
-      >
-        <Popup>Hey ! I live here</Popup>
-      </CustomMarker>
+      {markers.map((key, index) => (
+        (key.tipoIcon == "escola" && <CustomMarker key={index} icon={Iconesola} position={key.position}>
+          <Popup>{key.popup}</Popup>
+        </CustomMarker>)
+      ))}
+
     </MapContainer>
+   </div>
   );
 };
 
