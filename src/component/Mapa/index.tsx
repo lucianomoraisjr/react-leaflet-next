@@ -34,24 +34,26 @@ const Map = (props: Iprorps) => {
 
 
   return (
-   <div className={styles.customdiv}>
+    <div className={styles.customdiv}>
       <MapContainer
-      center={center}
-      zoom={14}
-      scrollWheelZoom={true}
-      style={{ height: "100%", width: "100%" }}
-    >
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      {markers.map((key, index) => (
-        (key.tipoIcon == "escola" && <CustomMarker key={index} icon={Iconesola} position={key.position}>
-          <Popup>{key.popup}</Popup>
-        </CustomMarker>)
-      ))}
+        center={center}
+        zoom={14}
+        scrollWheelZoom={true}
+        style={{ height: "100%", width: "100%" }}
+      >
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        {markers.map((key, index) => (
+          (key.tipoIcon == "escola" ? <CustomMarker key={index} icon={Iconesola} position={key.position}>
+            <Popup>{key.popup}</Popup>
+          </CustomMarker> : key.tipoIcon == "img" ? <CustomMarker key={index} icon={iconPerson} position={key.position}>
+            <Popup>{key.popup}</Popup>
+          </CustomMarker> : <></>)
+        ))}
 
-    </MapContainer>
-   </div>
+      </MapContainer>
+    </div>
   );
 };
 
